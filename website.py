@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect
 import cv2 as cv
 import numpy as np
 from scanner import scannerize_image, convert_to_pdf
@@ -33,24 +33,21 @@ def scanner():
             images = [scannerize_image(image) for image in images]
             pdf_buf = convert_to_pdf(images)
 
-            with open(f"{uuid.uuid4()}.pdf","wb") as f:
+            download_id = uuid.uuid4()
+
+            with open(f"{download_id}.pdf","wb") as f:
                 f.write(pdf_buf.getvalue())
 
             print("done")
 
             print(type(pdf_buf))
 
-            # return send_file(
-            #     pdf_buf,
-            #     as_attachment=True,
-            #     download_name='name.pdf',
-            #     mimetype='application/pdf'
-            #     )
+            return redirect(f'/download/{download_id}')
 
     return render_template('scanner.html')
 
 # create download function for download files
-@app.route('/download/<upload_id>')
+@app.route('/download/<upload_id>',methods=['GET'])
 def download(upload_id):
     return send_file(f"C:\\Users\\kenji\\Documents\\Code\\scanner\\{upload_id}.pdf", 
                      download_name=upload_id, mimetype='application/pdf', as_attachment=True)

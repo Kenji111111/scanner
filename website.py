@@ -16,30 +16,21 @@ def scanner():
         # Handle file upload
         files = request.files.getlist('file')
         if files:
-            print("got some files")
-
-            print(files)
-
-            # np_images = [np.fromfile(file, np.uint8) for file in files]
-
             images = [cv.imdecode(np.fromfile(file, np.uint8), cv.IMREAD_COLOR) for file in files]
 
             # Process the uploaded image
             images = [scannerize_image(image) for image in images]
             pdf_buf = convert_to_pdf(images)
-
             download_id = str(uuid.uuid4())
 
-            with open(f"{download_id}.pdf","wb") as f:
-                f.write(pdf_buf.getvalue())
+            download_name = download_id
+            if len(request.form.get("output_filename")) > 0:
+                download_name = request.form.get("output_filename")
 
-            print("done")
+            pdf_buf.seek(0)
 
-            print(type(pdf_buf))
-
-            # return redirect(f'/download/{download_id}')
-            return send_file(f"C:\\Users\\kenji\\Documents\\Code\\scanner\\{download_id}.pdf", 
-                     download_name=download_id, mimetype='application/pdf', as_attachment=True)
+            return send_file(pdf_buf, 
+                     download_name=download_name, mimetype='application/pdf', as_attachment=True)
 
     return render_template('scanner.html')
 

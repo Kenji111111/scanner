@@ -11,6 +11,8 @@
     <h1>Scanner Page</h1>
     <form action="/scanner" method="post" enctype="multipart/form-data">
         <input type="file" name="file" multiple accept="image/*">
+        <label for="output_filename">Output Filename:</label>
+        <input type="text" name="output_filename">
         <input type="submit" value="Upload">
     </form>
 

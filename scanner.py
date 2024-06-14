@@ -101,7 +101,7 @@ if __name__ =="__main__":
 
     images = [cv.imread(filename) for filename in filenames]
 
-    scanned = [scanerize_image(image) for image in images]
+    scanned = [scannerize_image(image) for image in images]
 
     b = convert_to_pdf(scanned)
     

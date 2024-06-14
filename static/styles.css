@@ -16,9 +16,12 @@ body {
 
 /* Container styling */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
 }
 
 /* Header styling */
@@ -54,8 +57,13 @@ nav ul li a:hover {
 }
 
 /* Main content area styling */
-.main-content {
-    padding: 20px;
+#main-text {
+    margin-top: 5%;
+    margin-left: 5%;
+    padding: 50px;
+    background: #fff;
+    font-size: 500%;
+    width:fit-content;
 }
 
 /* Footer styling */

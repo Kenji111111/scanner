@@ -2,14 +2,9 @@ from flask import Flask, render_template, request, send_file, redirect
 import cv2 as cv
 import numpy as np
 from scanner import scannerize_image, convert_to_pdf
-# from io import BytesIO
 import uuid
 
 app = Flask(__name__)
-
-# Configure upload folder
-# UPLOAD_FOLDER = 'uploads'
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
@@ -33,7 +28,7 @@ def scanner():
             images = [scannerize_image(image) for image in images]
             pdf_buf = convert_to_pdf(images)
 
-            download_id = uuid.uuid4()
+            download_id = str(uuid.uuid4())
 
             with open(f"{download_id}.pdf","wb") as f:
                 f.write(pdf_buf.getvalue())
@@ -42,15 +37,11 @@ def scanner():
 
             print(type(pdf_buf))
 
-            return redirect(f'/download/{download_id}')
+            # return redirect(f'/download/{download_id}')
+            return send_file(f"C:\\Users\\kenji\\Documents\\Code\\scanner\\{download_id}.pdf", 
+                     download_name=download_id, mimetype='application/pdf', as_attachment=True)
 
     return render_template('scanner.html')
-
-# create download function for download files
-@app.route('/download/<upload_id>',methods=['GET'])
-def download(upload_id):
-    return send_file(f"C:\\Users\\kenji\\Documents\\Code\\scanner\\{upload_id}.pdf", 
-                     download_name=upload_id, mimetype='application/pdf', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

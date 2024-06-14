@@ -8,8 +8,53 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
-    <div id="container">
-        <p id="main-text">Kenji's general purpose website!</p>
+    <div class="container">
+        <p id="main-text">Kenji's general purpose website.</p>
+      <button id="btn">Change Background</button>
+      <span class="code-element-item"></span>
     </div>
-</body>
+    <script>
+      const container = document.querySelector(".container");
+      const codeEl = document.querySelector(".code-element-item");
+
+      const btn = document.getElementById("btn");
+
+      var array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
+
+      function randomElement() {
+        return array[Math.floor(array.length * Math.random())];
+      }
+
+      function randomColor() {
+        let colour = "#";
+        for (var i = 0; i < 6; i++) {
+          colour += randomElement();
+        }
+
+        return colour;
+      }
+
+      function randomAngle() {
+        return Math.floor(360 * Math.random());
+      }
+
+      btn.onclick = applyBg;
+
+      applyBg();
+
+      function applyBg() {
+        let newBg =
+          "linear-gradient(" +
+          randomAngle() +
+          "deg, " +
+          randomColor() +
+          ", " +
+          randomColor() +
+          ", " +
+          randomColor() +
+          ")";
+        container.style.background = newBg;
+        codeEl.textContent = newBg;
+      }
+    </script>
 </html>

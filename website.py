@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, send_file
 import cv2 as cv
 import numpy as np
 from scanner import scannerize_image, convert_to_pdf
 # from io import BytesIO
 import uuid
-=======
-from flask import Flask, render_template, request, redirect, url_for
-import os
-import cv2
-import numpy as np
->>>>>>> 82b66bd (Initial commit.)
 
 app = Flask(__name__)
 
@@ -24,7 +17,6 @@ def index():
 
 @app.route('/scanner', methods=['GET', 'POST'])
 def scanner():
-<<<<<<< HEAD
     if request.method == 'POST':
         # Handle file upload
         files = request.files.getlist('file')
@@ -62,40 +54,6 @@ def scanner():
 def download(upload_id):
     return send_file(f"C:\\Users\\kenji\\Documents\\Code\\scanner\\{upload_id}.pdf", 
                      download_name=upload_id, mimetype='application/pdf', as_attachment=True)
-=======
-    # if request.method == 'POST':
-    #     # Handle file upload
-    #     file = request.files['file']
-    #     if file:
-    #         # Save the uploaded file
-    #         filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-    #         file.save(filename)
-
-    #         # Process the uploaded image
-    #         corners = detect_corners(filename)
-
-    #         # Pass the corner coordinates to the scanner template
-    #         return render_template('scanner.html', filename=file.filename, corners=corners)
-
-    return render_template('scanner.html')
-
-# def detect_corners(image_path):
-#     # Load the image
-#     image = cv2.imread(image_path)
-#     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
-#     # Use OpenCV's corner detection algorithm
-#     corners = cv2.goodFeaturesToTrack(gray, 4, 0.01, 10)
-#     corners = np.int0(corners)
-    
-#     # Extract corner coordinates
-#     corner_coords = []
-#     for corner in corners:
-#         x, y = corner.ravel()
-#         corner_coords.append((x, y))
-    
-#     return corner_coords
->>>>>>> 82b66bd (Initial commit.)
 
 if __name__ == '__main__':
     app.run(debug=True)

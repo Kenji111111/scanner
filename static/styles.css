@@ -1,0 +1,67 @@
+/* styles.css */
+
+/* Reset default browser styles */
+body, h1, h2, h3, p, ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a modern font stack */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333; /* Default text color */
+}
+
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styling */
+header {
+    background-color: #2ecc71; /* Primary green color */
+    padding: 20px;
+    color: #fff; /* Text color for header */
+    text-align: center;
+}
+
+/* Navigation menu styling */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff; /* Text color for navigation links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff; /* Text color for navigation links on hover */
+    opacity: 0.8;
+}
+
+/* Main content area styling */
+.main-content {
+    padding: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #2ecc71; /* Primary green color */
+    padding: 20px;
+    color: #fff; /* Text color for footer */
+    text-align: center;
+}

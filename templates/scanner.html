@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1>Scanner Page</h1>
+    <form action="/scanner" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" multiple accept="image/*">
+        <input type="submit" value="Upload">
+    </form>
+    {% if processed_images %}
+        {% for img in processed_images %}
+            <h2>Uploaded Image: {{ img.filename }}</h2>
+            {% if img.corners %}
+                <h3>Corners:</h3>
+                <ul>
+                    {% for corner in img.corners %}
+                        <li>{{ corner }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <a href="{{ url_for('index') }}">Go back to Index Page</a>
+</body>
+</html>
